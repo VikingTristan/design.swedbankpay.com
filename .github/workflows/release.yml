@@ -20,17 +20,13 @@ jobs:
       # Set brand specific variables
       - name: Environment variables
         id: variables
-        run: |
-          chmod +x ./.github/scripts/variables.sh
-          ./.github/scripts/variables.sh
+        run: ./.github/scripts/variables.sh
         env:
           BRAND: ${{ matrix.brand }}
 
       # Add sentry token
       - name: Sentry token
-        run: |
-          chmod +x ./.github/scripts/sentry.sh
-          ./.github/scripts/sentry.sh
+        run: ./.github/scripts/sentry.sh
         env:
           TOKEN: ${{ secrets.SENTRY_TOKEN }}
 

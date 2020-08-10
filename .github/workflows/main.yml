@@ -21,9 +21,7 @@ jobs:
       # Set brand specific variables
       - name: Environment variables
         id: variables
-        run: |
-          chmod +x ./.github/scripts/variables.sh
-          ./.github/scripts/variables.sh
+        run: ./.github/scripts/variables.sh
         env:
           BRAND: ${{ matrix.brand }}
 

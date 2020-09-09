@@ -28,7 +28,17 @@ jobs:
       - name: Create pull requests
         uses: peter-evans/create-pull-request@v3
         with:
-          delete-branch: true
+          delete-branch: false
           base: master
+          branch: ${{ github.ref }}
+          title: Release ${{ steps.gitversion.outputs.MajorMinorPatch }}
+
+      # Can we automatically merge this branch into develop once it's merged to master without having to create two PRs? [THN]
+
+      - name: Create pull requests
+        uses: peter-evans/create-pull-request@v3
+        with:
+          delete-branch: true
+          base: develop
           branch: ${{ github.ref }}
           title: Release ${{ steps.gitversion.outputs.MajorMinorPatch }}

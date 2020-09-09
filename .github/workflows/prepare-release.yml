@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.4
@@ -30,6 +30,7 @@ jobs:
         with:
           delete-branch: false
           base: master
+          body: ""
           branch: ${{ github.ref }}
           title: Release ${{ steps.gitversion.outputs.MajorMinorPatch }}
 
@@ -40,5 +41,6 @@ jobs:
         with:
           delete-branch: true
           base: develop
+          body: ""
           branch: ${{ github.ref }}
           title: Release ${{ steps.gitversion.outputs.MajorMinorPatch }}

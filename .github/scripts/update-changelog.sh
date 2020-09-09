@@ -6,6 +6,9 @@ echo '# Changelog
 
 '"$release_notes""$changelog" > ../../CHANGELOG.md
 
-git commit -am "Update changelog"
-
+git config user.name github-actions
+git config user.email github-actions@github.com
+git add .
+git commit -m "Update changelog"
+git status
 git push

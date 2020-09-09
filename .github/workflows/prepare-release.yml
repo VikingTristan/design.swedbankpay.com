@@ -28,7 +28,6 @@ jobs:
       - name: Create pull requests
         uses: peter-evans/create-pull-request@v3
         with:
-          delete-branch: false
           base: master
           body: ""
           branch: ${{ github.ref }}
@@ -39,7 +38,6 @@ jobs:
       - name: Create pull requests
         uses: peter-evans/create-pull-request@v3
         with:
-          delete-branch: true
           base: develop
           body: ""
           branch: ${{ github.ref }}

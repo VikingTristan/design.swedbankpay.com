@@ -14,7 +14,7 @@
     - Added .btn-link recommendation
 
 ### Changed
-- Breakpoints
+- Breakpoints 
   - Moved to Utilities
 - Buttons
   - Updated button sizes

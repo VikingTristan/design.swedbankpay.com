@@ -19,7 +19,6 @@ fi
 echo "Updating changelog for release ${version}"
 
 release_notes=`cat RELEASE-NOTES.md`
-echo ::set-output name=RELEASE_NOTES::${release_notes}
 changelog=`sed "s/^# Changelog//" CHANGELOG.md`
 
 begin_notes="<!--- Begin Release ${version} -->"

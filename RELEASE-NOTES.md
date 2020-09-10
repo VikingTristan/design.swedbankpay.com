@@ -15,7 +15,7 @@
 
 ### Changed
 - Breakpoints 
-  - Moved to Utilities
+  - Moved to Utilitiesss
 - Buttons
   - Updated button sizes
 - Forms

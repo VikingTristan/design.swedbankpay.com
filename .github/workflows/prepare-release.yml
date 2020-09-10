@@ -33,6 +33,10 @@ jobs:
           branch: ${{ github.ref }}
           title: Release ${{ steps.gitversion.outputs.MajorMinorPatch }}
 
+      - name: Checkout to default ref
+        run: |
+          git checkout ${{ github.ref }}
+
       # Can we automatically merge this branch into develop once it's merged to master without having to create two PRs? [THN]
 
       - name: Create pull requests

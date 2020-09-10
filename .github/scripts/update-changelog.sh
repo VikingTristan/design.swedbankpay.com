@@ -35,8 +35,7 @@ then
 $begin_notes
 $release_notes
 $end_notes
-$new_changelog
-" > CHANGELOG.md
+$new_changelog" > CHANGELOG.md
 else
     echo "Adding ${version} notes."
     echo "# Changelog
@@ -51,4 +50,4 @@ git config user.email github-actions@github.com
 git add .
 git commit -m "Update changelog"
 git status
-git push 
+git push

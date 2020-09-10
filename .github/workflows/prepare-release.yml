@@ -23,13 +23,14 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.9.4
 
       - name: Update changelog
+        id: changelog
         run: ./.github/scripts/update-changelog.sh ${{ steps.gitversion.outputs.MajorMinorPatch }}
 
       - name: Create pull requests
         uses: peter-evans/create-pull-request@v3
         with:
           base: master
-          body: ""
+          body: ${{ steps.changelog.outputs.RELEASE_NOTES }}
           branch: ${{ github.ref }}
           title: Release ${{ steps.gitversion.outputs.MajorMinorPatch }}
 
@@ -43,6 +44,6 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           base: develop
-          body: ""
+          body: ${{ steps.changelog.outputs.RELEASE_NOTES }}
           branch: ${{ github.ref }}
           title: Release ${{ steps.gitversion.outputs.MajorMinorPatch }}

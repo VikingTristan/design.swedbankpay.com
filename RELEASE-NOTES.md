@@ -2,6 +2,7 @@
 
 ### Added
 - A bunch of hahahahaha
+- Something else interesting!
 
 ### Changed
 - Something

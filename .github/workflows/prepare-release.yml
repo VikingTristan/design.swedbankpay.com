@@ -24,6 +24,8 @@ jobs:
 
       - name: Update changelog
         run: ./.github/scripts/update-changelog.sh
+        with:
+          version: ${{ steps.gitversion.outputs.MajorMinorPatch }}
 
       - name: Create pull requests
         uses: peter-evans/create-pull-request@v3

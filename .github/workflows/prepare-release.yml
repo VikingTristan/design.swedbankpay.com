@@ -33,8 +33,9 @@ jobs:
         id: changelog
         run: ./.github/scripts/update-changelog.sh ${{ steps.gitversion.outputs.MajorMinorPatch }}
 
+      # Content must be escaped to preserve newlines (https://github.community/t/set-output-truncates-multiline-strings/16852/3)
       - name: Get pull request body
-      - id: pr-body
+        id: pr-body
         run: |
           body=$(cat RELEASE-NOTES.md)
           body="${body//'%'/'%25'}"

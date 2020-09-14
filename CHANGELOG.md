@@ -5,7 +5,7 @@
 
 ### Added
 - Readme update
-<!--- End Release 4.8.1 --> 
+<!--- End Release 4.8.1 -->
 
 <!--- Begin Release 4.8.0 -->
 ## [4.8.0] - 10.09.2020

@@ -124,15 +124,14 @@ __*Make sure to follow the syntax rules enforced by ESLint & Stylelint.*__
 
 Before merging to master to create a release, make sure you follow these steps:
 
-1. Make sure the linting (`npm run lint`) and unit tests pass (`npm test`).
-2. Update the version in `~/package.json`.
-3. Make sure the changelog is correct (date and version) and only contains
-   changes for the current release.
-4. Update the version in the URL of the `version-badge` and `version-tag`
+1. Create a release branch `release/x.x.x`.
+2. Make sure the linting (`npm run lint`) and unit tests pass (`npm test`).
+3. Update the version in `~/package.json`.
+4. Make sure the `RELEASE-NOTES.md` is correct (date and version) and only contains
+   changes for the current release. (`CHANGELOG.md` will be updated automatically)
+5. Update the version in the URL of the `version-badge` and `version-tag`.
    at the bottom of this `README.md` file.
-5. Commit the changes and create a pull request from your branch to `develop`.
-6. When approved and merged, create a new pull request from `develop` to
-   `master`.
+6. Commit and push changes to your release branch. Two pull requests will be automatically created to `master` and `develop` branches.
 7. When approved, rename the merge commit to `Release x.x.x` and merge.
 8. Change branch to `master`.
 9. Create and push a new tag with the new release commit.
@@ -172,7 +171,7 @@ release notes content but keeps the headers.
 | `RELEASE-NOTES.md`  | Latest release notes of changes made to the project. Insert your changes here. This file is used by GitHub Actions to create a release body on GitHub.
 | `jest.config.js`    | [jest][jest] configuration.
 | `jest.setup.js`     | Script file that will run before jest executes the tests, this includes [enzyme][enzyme] setup, polyfills and other useful snippets.
-| `webpack.config.js` | [Webpack][webpack] configuration.
+| `webpack.config.js` | [Webpack][webpack] configuration. 
 
 ## Copyright, license and credits
 
@@ -180,8 +179,8 @@ Code and documentation © Swedbank Pay and contributors, released under the [MIT
 
 Inspired by [Bootstrap][bootstrap] and [Materialize][materialize].
 
-  [version-badge]:        https://img.shields.io/badge/Version-4.7.0-blue.svg
-  [version-tag]:          https://github.com/swedbankpay/design.swedbankpay.com/releases/tag/4.7.0
+  [version-badge]:        https://img.shields.io/badge/Version-4.8.1-blue.svg
+  [version-tag]:          https://github.com/swedbankpay/design.swedbankpay.com/releases/tag/4.8.1
   [github-actions-badge]: https://github.com/SwedbankPay/design.swedbankpay.com/workflows/Tag/badge.svg
   [codecov-badge]:        https://codecov.io/gh/swedbankpay/design.swedbankpay.com/branch/develop/graph/badge.svg
   [codecov-status]:       https://codecov.io/gh/swedbankpay/design.swedbankpay.com

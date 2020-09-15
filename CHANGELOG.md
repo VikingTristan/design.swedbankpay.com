@@ -1,5 +1,12 @@
 # Changelog
 
+<!--- Begin Release 4.8.1 -->
+## [4.8.1] - 14.09.2020
+
+### Added
+- Readme update
+<!--- End Release 4.8.1 -->
+
 <!--- Begin Release 4.8.0 -->
 ## [4.8.0] - 10.09.2020
 

@@ -171,7 +171,7 @@ release notes content but keeps the headers.
 | `RELEASE-NOTES.md`  | Latest release notes of changes made to the project. Insert your changes here. This file is used by GitHub Actions to create a release body on GitHub.
 | `jest.config.js`    | [jest][jest] configuration.
 | `jest.setup.js`     | Script file that will run before jest executes the tests, this includes [enzyme][enzyme] setup, polyfills and other useful snippets.
-| `webpack.config.js` | [Webpack][webpack] configuration.
+| `webpack.config.js` | [Webpack][webpack] configuration. 
 
 ## Copyright, license and credits
 
@@ -179,8 +179,8 @@ Code and documentation © Swedbank Pay and contributors, released under the [MIT
 
 Inspired by [Bootstrap][bootstrap] and [Materialize][materialize].
 
-  [version-badge]:        https://img.shields.io/badge/Version-4.7.0-blue.svg
-  [version-tag]:          https://github.com/swedbankpay/design.swedbankpay.com/releases/tag/4.7.0
+  [version-badge]:        https://img.shields.io/badge/Version-4.8.1-blue.svg
+  [version-tag]:          https://github.com/swedbankpay/design.swedbankpay.com/releases/tag/4.8.1
   [github-actions-badge]: https://github.com/SwedbankPay/design.swedbankpay.com/workflows/Tag/badge.svg
   [codecov-badge]:        https://codecov.io/gh/swedbankpay/design.swedbankpay.com/branch/develop/graph/badge.svg
   [codecov-status]:       https://codecov.io/gh/swedbankpay/design.swedbankpay.com

@@ -1,4 +1,10 @@
-## [4.8.1] - 14.09.2020
+## [4.9.0] - 13.10.2020
 
 ### Added
-- Readme update
+- Some stuff
+
+### Changed
+- Some thing
+
+### Fixed
+- Other stuff

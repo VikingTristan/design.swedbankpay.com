@@ -54,7 +54,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           base: master
-          body: ${{ neeeds.changelog.outputs.body }}
+          body: ${{ needs.changelog.outputs.body }}
           branch: ${{ github.ref }}
           title: Release ${{ needs.version.outputs.version }} (master)
 

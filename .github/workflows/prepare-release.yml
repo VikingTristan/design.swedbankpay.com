@@ -8,20 +8,15 @@ jobs:
   version:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.gitversion.outputs.MajorMinorPatch }}
+      version: ${{ steps.variables.outputs.VERSION }}
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - uses: gittools/actions/gitversion/setup@v0.9.4
-        with:
-          versionSpec: '5.3.x'
-
-      - name: Use GitVersion
-        id: gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.4
+      # Set brand specific variables
+      - name: Environment variables
+        id: variables
+        run: ./.github/scripts/variables.sh --brand swedbankpay --ref ${{ github.ref }}
 
   changelog:
     runs-on: ubuntu-latest

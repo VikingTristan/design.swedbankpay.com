@@ -43,6 +43,12 @@ generate_variables() {
         echo "::set-output name=VERSION::$version"
     fi
 
+    if [[ "$ref" == refs/heads/release/* ]]; then
+        # Override GitVersion's version on tags, just to be sure.
+        version="${ref#refs/heads/release/}"
+        echo "::set-output name=VERSION::$version"
+    fi
+
     echo "Ref:      $ref"
     echo "Version:  $version"
     echo "Brand:    $brand"

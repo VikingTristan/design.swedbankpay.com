@@ -1,5 +1,12 @@
 # Changelog
 
+<!--- Begin Release 4.15.0 -->
+## [4.15.0] - 14.10.2020
+
+### Added
+- Something absolutely astonishing
+<!--- End Release 4.15.0 --> 
+
 <!--- Begin Release 4.9.0 -->
 ## [4.9.0] - 13.10.2020
 

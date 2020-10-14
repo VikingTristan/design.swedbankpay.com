@@ -42,14 +42,17 @@ generate_variables() {
         version="${ref#refs/tags/}"
         echo "::set-output name=VERSION::$version"
     fi
-
-    if [[ "$ref" == refs/heads/release/* ]]; then
-        # Override GitVersion's version on tags, just to be sure.
+    elif [[ "$ref" == refs/heads/release/* ]]; then
         version="${ref#refs/heads/release/}"
         echo "::set-output name=VERSION::$version"
     fi
+    elif [[ "$ref" == refs/heads/* ]]; then
+        branch="${ref#refs/heads/}"
+        echo "::set-output name=BRANCH::$branch"
+    fi
 
     echo "Ref:      $ref"
+    echo "Branch:   $branch"
     echo "Version:  $version"
     echo "Brand:    $brand"
 

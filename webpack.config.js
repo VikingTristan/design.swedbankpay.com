@@ -23,7 +23,6 @@ module.exports = (env, argv) => {
     const version = env && env.semver ? env.semver : "LOCAL_DEV";
     const isRelease = env && env.release === "true";
     const isGitHubActions = env && env.github_actions === "true";
-    const baseUrl = env && env.baseUrl ? env.baseUrl : null;
     const basename = env && env.basename ? `/${env.basename}/` : "/";
 
     const config = {
@@ -253,7 +252,6 @@ module.exports = (env, argv) => {
                 hash: true,
                 title: `${brandTitle} Design Guide`,
                 chunks: ["dg"],
-                baseUrl,
                 basename
             }),
             new HtmlWebpackPlugin({
@@ -262,7 +260,6 @@ module.exports = (env, argv) => {
                 hash: true,
                 chunks: ["dg"],
                 title: `${brandTitle} Design Guide`,
-                baseUrl,
                 basename
             }),
         );

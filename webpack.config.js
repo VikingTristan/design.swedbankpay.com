@@ -23,7 +23,6 @@ module.exports = (env, argv) => {
     const version = env && env.semver ? env.semver : "LOCAL_DEV";
     const isRelease = env && env.release === "true";
     const isGitHubActions = env && env.github_actions === "true";
-    const baseUrl = env && env.baseUrl ? env.baseUrl : null;
     const basename = env && env.basename ? `/${env.basename}/` : "/";
 
     const config = {
@@ -253,7 +252,6 @@ module.exports = (env, argv) => {
                 hash: true,
                 title: `${brandTitle} Design Guide`,
                 chunks: ["dg"],
-                baseUrl,
                 basename
             }),
             new HtmlWebpackPlugin({
@@ -262,7 +260,6 @@ module.exports = (env, argv) => {
                 hash: true,
                 chunks: ["dg"],
                 title: `${brandTitle} Design Guide`,
-                baseUrl,
                 basename
             }),
         );
@@ -336,6 +333,58 @@ module.exports = (env, argv) => {
                             {
                                 source: `./src/img/${brand}/resources/logotype/*.png`,
                                 destination: `./dist${basename}img/logotype`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/buttons/*.png`,
+                                destination: `./dist${basename}img/documentation/buttons`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/logotype/*.png`,
+                                destination: `./dist${basename}img/documentation/logotype`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/cards/*.png`,
+                                destination: `./dist${basename}img/documentation/cards`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/accessibility/*.png`,
+                                destination: `./dist${basename}img/documentation/accessibility`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/imagery/*.svg`,
+                                destination: `./dist${basename}img/documentation/imagery`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/spacing/*.svg`,
+                                destination: `./dist${basename}img/documentation/spacing`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/copywriting/*.png`,
+                                destination: `./dist${basename}img/documentation/copywriting`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/grid/*.png`,
+                                destination: `./dist${basename}img/documentation/grid`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/colors/*.png`,
+                                destination: `./dist${basename}img/documentation/colors`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/introduction/*.png`,
+                                destination: `./dist${basename}img/documentation/introduction`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/forDevelopers/*.png`,
+                                destination: `./dist${basename}img/documentation/forDevelopers`
+                            },
+                            {
+                                source: `./src/img/${brand}/documentation/forDesigners/*.png`,
+                                destination: `./dist${basename}img/documentation/forDesigners`
+                            },
+                            {
+                                source: "./src/img/background/*.svg",
+                                destination: `./dist${basename}img/background`
                             },
                             {
                                 source: "./src/assets/logos/*.zip",

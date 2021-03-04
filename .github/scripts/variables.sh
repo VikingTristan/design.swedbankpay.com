@@ -4,7 +4,6 @@ me=$(basename "$0")
 
 help_message="\
 Generates variables based on the provided brand and ref arguments.
-
 Usage:
     $me --brand <brand> [--ref <ref>]
     $me --help
@@ -38,7 +37,6 @@ initialize() {
 
 generate_variables() {
     if [[ "$ref" == refs/tags/* ]]; then
-        # Override GitVersion's version on tags, just to be sure.
         version="${ref#refs/tags/}"
         echo "::set-output name=VERSION::$version"
     elif [[ "$ref" == refs/heads/release/* ]]; then
@@ -56,13 +54,13 @@ generate_variables() {
 
     if [ "$brand" == "payex" ]; then
         echo ::set-output name=BRAND_NAME::PayEx
-        echo ::set-output name=BRAND_URL::https://payexdesignguidetest.z6.web.core.windows.net
-        echo ::set-output name=AZURE_ACCOUNT::payexdesignguidetest
+        echo ::set-output name=AZURE_ACCOUNT_PROD::payexdesignguidetest
+        echo ::set-output name=AZURE_ACCOUNT_STAGE::payexdesignguidetest
         echo ::set-output name=BUILD_SCRIPT::build:prod:payex
     elif [ "$brand" == "swedbankpay" ]; then
         echo ::set-output name=BRAND_NAME::SwedbankPay
-        echo ::set-output name=BRAND_URL::https://swedpaydesignguidetest.z6.web.core.windows.net
-        echo ::set-output name=AZURE_ACCOUNT::swedpaydesignguidetest
+        echo ::set-output name=AZURE_ACCOUNT_PROD::swedpaydesignguidetest
+        echo ::set-output name=AZURE_ACCOUNT_STAGE::swedpaydesignguidetest
         echo ::set-output name=BUILD_SCRIPT::build:prod
     else
         echo "Unknown brand '$brand'!"

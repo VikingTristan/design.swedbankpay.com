@@ -16,8 +16,6 @@ if [ -z "$version" ]; then
     exit 1
 fi
 
-echo "Updating changelog for release ${version}"
-
 release_notes=$(cat RELEASE-NOTES.md)
 changelog=$(sed "s/^# Changelog//" CHANGELOG.md)
 

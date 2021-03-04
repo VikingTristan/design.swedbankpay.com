@@ -1,62 +1,97 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { changeLogs } from "./constants";
+import { setTitle, RemoveVscroll } from "../utils";
+import routes from "@src/App/routes/all";
+import packageJson from "~/package";
 
-import { setTitle } from "../utils";
+const BASENAME = process.env.basename;
 
 const Home = () => {
     useEffect(() => {
+        RemoveVscroll();
         setTitle("Home");
     });
 
-    return (
-        <div className="doc-container">
-            <div className="alert alert-complex alert-warning mt-2">
-                <header className="alert-header">
-                    <i className="material-icons alert-icon">warning</i>
-                    <h3>Site under development</h3>
+    const FrontPage = () => (
+        <section className="dg-front-page-container m-auto d-flex flex-column">
+            <div className="my-auto">
+                <img src={`${BASENAME}img/background/cluster-bubbles.svg`} className="background-img cluster-bubble d-none d-xl-block mt-n5"/>
+                <header>
+                    <span className="dg-title-small d-block m-0">Welcome to the</span>
+                    <span className="dg-title-big my-0">Swedbank Pay Design Guide</span>
                 </header>
-                <div className="alert-body">
-                    <p>The Design Guide is under active development and is subject to change.</p>
+
+                <div className="dg-version-indicator">
+                    <span>Ver. {packageJson.version}</span>
+                </div>
+
+                <p className="front-page-lead">Here you can find components and guidelines to help you  and your team work more efficiently and create a cohesive user experience through all our products and touch points.</p>
+
+                <div className="row dg-cards-container mt-4">
+                    {routes.map(route => (
+                        <div key={route.title} className="col-12 col-sm-6 col-lg-3 d-flex">
+                            <Link to={route.path} className="cards cards-primary">
+                                <div className="cards-icon">
+                                    <i className={`material-icons-outlined ${route.icon.rotate && "rotate-icon"}`}>{route.icon.name}</i>
+                                </div>
+                                <div className="cards-content">
+                                    <span className="h4">{route.title === "Utilities" ? "Utility" : route.title }</span>
+                                    <span>{route.entryCardText}</span>
+                                </div>
+                                <i className="material-icons">arrow_forward</i>
+                            </Link>
+                        </div>
+                    ))}
                 </div>
             </div>
-            <div className="row">
-                <div className="col-12 col-md-4 pt-3 pt-md-0 d-flex">
-                    <div className="doc-card card card-plain">
-                        <div className="card-body text-center d-flex flex-column">
-                            <div className="doc-circle">
-                                <i className="material-icons material-icons-large text-white">play_circle_outline</i>
-                            </div>
-                            <h2>Get started</h2>
-                            <p>Information on how to get started.</p>
-                            <Link className="btn btn-guiding btn-outline btn-block mt-auto" to="/getting-started">Get started</Link>
-                        </div>
-                    </div>
+            <div className="mt-auto d-none d-md-inline-flex mb-3">
+                <a className="dg-next-page-content mx-auto"
+                    onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+                    <span>Click here to see changelog</span>
+                    <i className="material-icons">expand_more</i>
+                </a>
+            </div>
+            <img src={`${BASENAME}img/background/large-bubble.svg`} className="background-img large-bubble d-none d-xl-block"/>
+
+        </section>
+    );
+
+    const Changelog = () => (
+        <section className="dg-changelog-container d-flex flex-column mb-0">
+            <div className="container dg-changelog-content my-auto">
+                <div className="row mt-3">
+                    <span className="dg-changlelog-title">What’s new in the design guide
+                        <div className="dg-changelog-divider my-2"></div>
+                    </span>
                 </div>
-                <div className="col-12 col-md-4 pt-3 pt-md-0 d-flex">
-                    <div className="doc-card card card-plain">
-                        <div className="card-body text-center d-flex flex-column">
-                            <div className="doc-circle">
-                                <i className="material-icons material-icons-large text-white">desktop_windows</i>
-                            </div>
-                            <h2>Components</h2>
-                            <p>User interface components for websites and web applications</p>
-                            <Link className="btn btn-guiding btn-outline btn-block mt-auto" to="/components">Components</Link>
+
+                {changeLogs.map(log => (
+                    <div key={log.version} className="row border-bottom pb-2 mt-4">
+                        <div className="px-0 pb-2">Version {log.version}</div>
+                        <div className="dg-changelog-description px-0">
+                            <span className="h4">{log.title}</span>
+                            <p className="mt-2">{log.text}</p>
                         </div>
                     </div>
-                </div>
-                <div className="col-12 col-md-4 pt-3 pt-md-0 d-flex">
-                    <div className="doc-card card card-plain">
-                        <div className="card-body text-center d-flex flex-column">
-                            <div className="doc-circle">
-                                <i className="material-icons material-icons-large text-white">folder_open</i>
-                            </div>
-                            <h2>Resources</h2>
-                            <p>Downloadables and resource usage guidelines.</p>
-                            <Link className="btn btn-guiding btn-outline btn-block mt-auto" to="/resources">Resources</Link>
-                        </div>
-                    </div>
+                ))}
+
+                <div className="row">
+                    <a href="https://github.com/SwedbankPay/design.swedbankpay.com/releases" target="_blank" rel="noopener noreferrer"className="icon-link mt-4 px-0">
+                        <i className="material-icons mr-2" aria-hidden="true">open_in_new</i>
+                        <span>Github - Detailed changelog</span>
+                    </a>
                 </div>
             </div>
+        </section>
+    );
+
+    return (
+        <div className="doc-container dg-front-page py-0">
+            <FrontPage />
+            <Changelog />
+            <img src={`${BASENAME}img/background/two-bubbles.svg`} className="background-img two-bubbles d-none d-xl-block"/>
+            <img src={`${BASENAME}img/background/single-bubble.svg`} className="background-img single-bubble d-none d-xl-block"/>
         </div>
     );
 };

@@ -23,6 +23,11 @@
 html {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     height: 100%;
+    scroll-behavior: smooth;
+
+    @media (min-width: @screen-lg-max) {
+        scroll-snap-type: y mandatory;
+    }
 }
 
 body {
@@ -32,6 +37,14 @@ body {
     color: @brand-secondary;
     background-color: @body-bg;
     height: 100%;
+
+    &.no-vscroll {
+        overflow-x: hidden;
+    }
+
+    &.no-scroll {
+        overflow: hidden;
+    }
 
     &.has-vscroll {
         overflow: hidden;
@@ -192,7 +205,7 @@ textarea {
 
 // Fix issue with select tags in safari
 select {
-    background: url(../../icons/shapes/arrow.svg);
+    background: url(../../icons/shapes/expand-more.svg);
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     -moz-appearance: none;

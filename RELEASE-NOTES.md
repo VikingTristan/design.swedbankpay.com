@@ -1,4 +1,3 @@
-# Release notes
-
-## [5.0.2] - 2021-02-15
-something something yo yo
+## [6.0.1] - 04.03.2021
+- something something yo yo
+- something else!

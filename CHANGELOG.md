@@ -1,11 +1,10 @@
 # Changelog
 
 <!--- Begin Release 6.0.1 -->
-# Release notes
-
-## [5.0.2] - 2021-02-15
-something something yo yo
-<!--- End Release 6.0.1 --> 
+## [6.0.1] - 04.03.2021
+- something something yo yo
+- something else!
+<!--- End Release 6.0.1 -->
 
 ## [5.0.2] - 2021-02-15 
 

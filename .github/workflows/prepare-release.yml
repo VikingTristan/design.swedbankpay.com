@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Create pull requests
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v3.8.2
         with:
           base: master
           body: ${{ needs.changelog.outputs.body }}
@@ -59,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Create pull requests
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v3.8.2
         with:
           base: develop
           body: ${{ needs.changelog.outputs.body }}

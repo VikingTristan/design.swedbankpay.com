@@ -50,7 +50,7 @@ jobs:
         with:
           base: master
           body: ${{ needs.changelog.outputs.body }}
-          # branch: ${{ github.ref }}
+          branch: ${{ github.ref }}
           title: Release ${{ needs.version.outputs.version }} (master)
 
   create-pr-develop:
@@ -63,5 +63,5 @@ jobs:
         with:
           base: develop
           body: ${{ needs.changelog.outputs.body }}
-          # branch: ${{ github.ref }}
+          branch: ${{ github.ref }}
           title: Release ${{ needs.version.outputs.version }} (develop)

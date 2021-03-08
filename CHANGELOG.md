@@ -1,5 +1,10 @@
 # Changelog
 
+<!--- Begin Release 6.0.2 -->
+## [5.0.2] - 2021-02-15 
+awdawd
+<!--- End Release 6.0.2 -->
+
 ## [5.0.2] - 2021-02-15 
 
 ## Summary
@@ -42,3 +47,34 @@
   - Edge browser icon is to small
   - Enlarged Edge browser icon in For developers
   - Fixed documentation referring to an older version of design guide 
+
+<!--- Begin Release 4.8.1 -->
+## [4.8.1] - 14.09.2020
+
+### Added
+- Readme update
+<!--- End Release 4.8.1 -->
+
+<!--- Begin Release 4.8.0 -->
+## [4.8.0] - 10.09.2020
+
+### Added
+- A bunch of hahahahaha
+- Something else interesting! awda wdwad 
+- awdok awpodkpawo kdopkawd dwa 
+
+### Changed
+- Something
+- What
+
+### Fixed
+- Some bug
+<!--- End Release 4.8.0 -->
+
+
+## [4.6.0] - 2020-05-29
+
+### Added
+- awdawdawd
+### Changed
+- awdawdawd

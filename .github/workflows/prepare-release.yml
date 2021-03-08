@@ -18,35 +18,9 @@ jobs:
         id: variables
         run: ./.github/scripts/variables.sh --brand swedbankpay --ref ${{ github.ref }}
 
-  create-pr-master:
-    runs-on: ubuntu-latest
-    needs: [version]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Create pull requests
-        uses: peter-evans/create-pull-request@v3.8.2
-        with:
-          base: master
-          body: ${{ needs.changelog.outputs.body }}
-          branch: ${{ github.ref }}
-          title: Release ${{ needs.version.outputs.version }} (master)
-
-  create-pr-develop:
-    runs-on: ubuntu-latest
-    needs: [version]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Create pull requests
-        uses: peter-evans/create-pull-request@v3.8.2
-        with:
-          base: develop
-          body: ${{ needs.changelog.outputs.body }}
-          branch: ${{ github.ref }}
-          title: Release ${{ needs.version.outputs.version }} (develop)
-
   changelog:
     runs-on: ubuntu-latest
-    needs: [version, create-pr-master, create-pr-develop]
+    needs: version
     outputs:
       body: ${{ steps.pr-body.outputs.body }}
 
@@ -66,4 +40,28 @@ jobs:
           body="${body//$'\r'/'%0D'}"
           echo ::set-output name=body::$body
 
+  create-pr-master:
+    runs-on: ubuntu-latest
+    needs: [version, changelog]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create pull requests
+        uses: peter-evans/create-pull-request@v3.8.2
+        with:
+          base: master
+          body: ${{ needs.changelog.outputs.body }}
+          branch: ${{ github.ref }}
+          title: Release ${{ needs.version.outputs.version }} (master)
 
+  create-pr-develop:
+    runs-on: ubuntu-latest
+    needs: [version, changelog]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create pull requests
+        uses: peter-evans/create-pull-request@v3.8.2
+        with:
+          base: develop
+          body: ${{ needs.changelog.outputs.body }}
+          branch: ${{ github.ref }}
+          title: Release ${{ needs.version.outputs.version }} (develop)

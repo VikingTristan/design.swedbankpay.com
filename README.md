@@ -187,9 +187,9 @@ Code and documentation © Swedbank Pay and contributors, released under the [MIT
 
 Inspired by [Bootstrap][bootstrap] and [Materialize][materialize].
 
-[version-badge]:      https://img.shields.io/badge/Version-6.0.3-blue.svg
+[version-badge]:      https://img.shields.io/badge/Version-6.0.4-blue.svg
 
-[version-tag]:        https://github.com/swedbankpay/design.swedbankpay.com/releases/tag/6.0.3
+[version-tag]:        https://github.com/swedbankpay/design.swedbankpay.com/releases/tag/6.0.4
 
 [github-actions-badge]: https://github.com/SwedbankPay/design.swedbankpay.com/workflows/Tag/badge.svg
 

@@ -54,13 +54,13 @@ generate_variables() {
 
     if [ "$brand" == "payex" ]; then
         echo ::set-output name=BRAND_NAME::PayEx
-        echo ::set-output name=AZURE_ACCOUNT_PROD::payexdesignguide
-        echo ::set-output name=AZURE_ACCOUNT_STAGE::pxdesignguidestage
+        echo ::set-output name=AZURE_ACCOUNT_PROD::payexdesignguidetest
+        echo ::set-output name=AZURE_ACCOUNT_STAGE::payexdesignguidetest
         echo ::set-output name=BUILD_SCRIPT::build:prod:payex
     elif [ "$brand" == "swedbankpay" ]; then
         echo ::set-output name=BRAND_NAME::SwedbankPay
-        echo ::set-output name=AZURE_ACCOUNT_PROD::swedbankpaydesignguide
-        echo ::set-output name=AZURE_ACCOUNT_STAGE::spdesignguidestage
+        echo ::set-output name=AZURE_ACCOUNT_PROD::swedpaydesignguidetest
+        echo ::set-output name=AZURE_ACCOUNT_STAGE::swedpaydesignguidetest
         echo ::set-output name=BUILD_SCRIPT::build:prod
     else
         echo "Unknown brand '$brand'!"

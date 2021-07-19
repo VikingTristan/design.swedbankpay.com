@@ -1,5 +1,5 @@
-import { init } from "~/node_modules/@sentry/browser";
-import "@src/polyfills";
+import { init } from "@sentry/browser";
+import "../../polyfills";
 
 import accordion from "./accordion";
 import actionList from "./action-list";

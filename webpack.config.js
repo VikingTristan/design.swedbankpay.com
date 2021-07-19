@@ -28,9 +28,11 @@ module.exports = (env, argv) => {
     const config = {
         mode: argv.mode || "production",
         entry: {
-            dg: "./src/scripts/main/index.js",
-            "dg-dashboard": "./src/scripts/dashboard/index.js",
-            app: `./src/${brand}.js`
+            designguide: "./src/scripts/main/index.js",
+            "designguide-dashboard": "./src/scripts/dashboard/index.js",
+            app: `./src/${brand}.js`,
+            swedbankpay: "./src/swedbankpay.js",
+            payex: "./src/payex.js"
         },
         resolve: {
             extensions: [".js", ".jsx", ".json"]
@@ -157,31 +159,30 @@ module.exports = (env, argv) => {
         optimization: {
             splitChunks: {
                 cacheGroups: {
-                    docStyles: {
-                        name: "documentation",
-                        test: brand === "swedbankpay" ? /documentation-swedbankpay\.less/ : /documentation-payex\.less/,
+                    documentationSwedbankpay: {
+                        name: "documentation-swedbankpay",
+                        test: /documentation-swedbankpay\.less/,
                         chunks: "all",
                         enforce: true
                     },
-                    dgStyles: {
-                        name: "dg-style",
-                        test: brand === "swedbankpay" ? /(flatpickr\.css|swedbankpay\.less)$/ : /(flatpickr\.css|payex\.less)$/,
+                    documentationPayex: {
+                        name: "documentation-payex",
+                        test: /documentation-payex\.less/,
                         chunks: "all",
                         enforce: true
                     }
                 }
             },
-            minimize: false,
-            // minimize: isProd,
-            // minimizer: [
-            //     new TerserPlugin({
-            //         terserOptions: {
-            //             compress: { drop_console: true },
-            //             sourceMap: true // Must be set to true if using source-maps in production
-            //         }
-            //     }),
-            //     new CssMinimizerPlugin()
-            // ],
+            minimize: isProd,
+            minimizer: [
+                new TerserPlugin({
+                    terserOptions: {
+                        compress: { drop_console: true },
+                        sourceMap: true // Must be set to true if using source-maps in production
+                    }
+                }),
+                new CssMinimizerPlugin()
+            ],
             mergeDuplicateChunks: isProd
         },
         plugins: [
@@ -191,7 +192,8 @@ module.exports = (env, argv) => {
                 title: `${brandTitle} Design Guide`,
                 meta: {
                     "informational-version": infoVersion
-                }
+                },
+                excludeChunks: ["swedbankpay", "payex"]
             }),
             new MiniCssExtractPlugin({
                 filename: "styles/[name].css"
@@ -230,16 +232,16 @@ module.exports = (env, argv) => {
                 template: "./build/rootindex.html",
                 hash: true,
                 title: `${brandTitle} Design Guide`,
-                chunks: ["dg"],
-                basename
+                basename,
+                excludeChunks: ["swedbankpay", "payex"]
             }),
             new HtmlWebpackPlugin({
                 filename: `${rootPath}404.html`,
                 template: "./build/root404.html",
                 hash: true,
-                chunks: ["dg"],
                 title: `${brandTitle} Design Guide`,
-                basename
+                basename,
+                excludeChunks: ["swedbankpay", "payex"]
             }),
         );
 
@@ -373,23 +375,27 @@ module.exports = (env, argv) => {
                                     destination: "./dist/temp/icons/icons"
                                 },
                                 {
-                                    source: `./dist${basename}scripts/dg.js`,
+                                    source: `./dist${basename}scripts/designguide.js`,
                                     destination: "./dist/temp/release/scripts"
                                 },
                                 {
-                                    source: `./dist${basename}scripts/dg.js.map`,
+                                    source: `./dist${basename}scripts/designguide.js.map`,
                                     destination: "./dist/temp/release/scripts"
                                 },
                                 {
-                                    source: `./dist${basename}scripts/dg-dashboard.js`,
+                                    source: `./dist${basename}scripts/designguide-dashboard.js`,
                                     destination: "./dist/temp/release/scripts"
                                 },
                                 {
-                                    source: `./dist${basename}scripts/dg-dashboard.js.map`,
+                                    source: `./dist${basename}scripts/designguide-dashboard.js.map`,
                                     destination: "./dist/temp/release/scripts"
                                 },
                                 {
-                                    source: `./dist${basename}styles/dg-style.css`,
+                                    source: `./dist${basename}styles/swedbankpay.css`,
+                                    destination: "./dist/temp/release/styles"
+                                },
+                                {
+                                    source: `./dist${basename}styles/payex.css`,
                                     destination: "./dist/temp/release/styles"
                                 }
                             ],

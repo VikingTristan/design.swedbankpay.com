@@ -28,7 +28,7 @@ module.exports = (env, argv) => {
     const config = {
         mode: argv.mode || "production",
         entry: {
-            dg: ["@babel/polyfill", "./src/scripts/main/index.js"],
+            dg: "./src/scripts/main/index.js",
             "dg-dashboard": "./src/scripts/dashboard/index.js",
             app: `./src/${brand}.js`
         },
@@ -171,16 +171,16 @@ module.exports = (env, argv) => {
                     }
                 }
             },
-            minimize: isProd,
-            minimizer: [
-                new TerserPlugin({
-                    terserOptions: {
-                        compress: { drop_console: true },
-                        sourceMap: true // Must be set to true if using source-maps in production
-                    }
-                }),
-                new CssMinimizerPlugin()
-            ],
+            // minimize: isProd,
+            // minimizer: [
+            //     new TerserPlugin({
+            //         terserOptions: {
+            //             compress: { drop_console: true },
+            //             sourceMap: true // Must be set to true if using source-maps in production
+            //         }
+            //     }),
+            //     new CssMinimizerPlugin()
+            // ],
             mergeDuplicateChunks: isProd
         },
         plugins: [

@@ -171,6 +171,7 @@ module.exports = (env, argv) => {
                     }
                 }
             },
+            minimize: false,
             // minimize: isProd,
             // minimizer: [
             //     new TerserPlugin({

@@ -1,8 +1,9 @@
 {
   "name": "@vikingtom/design.swedbankpay.com",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "description": "VikingTom Design Guide",
   "main": "dist/scripts/dg.js",
+  "module": "esm",
   "scripts": {
     "start": "webpack serve --hot --mode development",
     "start:payex": "webpack serve --hot --mode development --env brand=payex",

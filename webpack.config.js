@@ -105,7 +105,7 @@ module.exports = (env, argv) => {
                         {
                             loader: "file-loader",
                             options: {
-                                outputPath: "fonts/",
+                                outputPath: "designguide/fonts/",
                                 name: "[name].[ext]"
                             }
                         }
@@ -120,7 +120,7 @@ module.exports = (env, argv) => {
                         {
                             loader: "file-loader",
                             options: {
-                                outputPath: "img/flags/1x1/",
+                                outputPath: "designguide/img/flags/1x1/",
                                 name: "[name].[ext]?[contenthash]"
                             }
                         }
@@ -135,7 +135,7 @@ module.exports = (env, argv) => {
                         {
                             loader: "file-loader",
                             options: {
-                                outputPath: "img/flags/4x3/",
+                                outputPath: "designguide/img/flags/4x3/",
                                 name: "[name].[ext]?[contenthash]"
                             }
                         }
@@ -148,7 +148,7 @@ module.exports = (env, argv) => {
                         {
                             loader: "file-loader",
                             options: {
-                                outputPath: "img/",
+                                outputPath: "designguide/img/",
                                 name: "[name].[ext]?[contenthash]"
                             }
                         }
@@ -276,7 +276,7 @@ module.exports = (env, argv) => {
             new FaviconsWebpackPlugin({
                 logo: `./src/img/${brand}/favicon.png`,
                 cache: true,
-                prefix: "icons/",
+                prefix: "designguide/icons/",
                 inject: true,
                 favicons: {
                     appName: `${brandTitle} Design Guide`,
@@ -289,6 +289,7 @@ module.exports = (env, argv) => {
                 }
             }),
             new FileManagerPlugin({
+                runTasksInSeries: true,
                 events: {
                     onStart: [
                         {
@@ -371,20 +372,20 @@ module.exports = (env, argv) => {
                                     destination: `./dist${basename}templates`
                                 },
                                 {
-                                    source: `./dist${basename}icons`,
+                                    source: `./dist${basename}designguide/icons`,
                                     destination: "./dist/temp/icons/icons"
                                 },
                                 {
                                     source: `./dist${basename}scripts/designguide.js`,
-                                    destination: "./dist/temp/release/scripts"
+                                    destination: "./dist/temp/release/scripts/"
                                 },
                                 {
                                     source: `./dist${basename}scripts/designguide.js.map`,
-                                    destination: "./dist/temp/release/scripts"
+                                    destination: "./dist/temp/release/scripts/"
                                 },
                                 {
                                     source: `./dist${basename}scripts/designguide-dashboard.js`,
-                                    destination: "./dist/temp/release/scripts"
+                                    destination: "./dist/temp/release/scripts/"
                                 },
                                 {
                                     source: `./dist${basename}scripts/designguide-dashboard.js.map`,
@@ -392,11 +393,31 @@ module.exports = (env, argv) => {
                                 },
                                 {
                                     source: `./dist${basename}styles/swedbankpay.css`,
-                                    destination: "./dist/temp/release/styles"
+                                    destination: "./dist/temp/release/styles/"
                                 },
                                 {
                                     source: `./dist${basename}styles/payex.css`,
-                                    destination: "./dist/temp/release/styles"
+                                    destination: "./dist/temp/release/styles/"
+                                },
+
+                                /*
+                                 * Design Guide files for node package
+                                 */
+                                {
+                                    source: `./dist${basename}scripts/designguide*.*`,
+                                    destination: "./dist/designguide/scripts/"
+                                },
+                                {
+                                    source: `./dist${basename}styles/documentation*.*`,
+                                    destination: "./dist/designguide/styles/"
+                                },
+                                {
+                                    source: `./dist${basename}styles/payex.css`,
+                                    destination: "./dist/designguide/styles/"
+                                },
+                                {
+                                    source: `./dist${basename}styles/swedbankpay.css`,
+                                    destination: "./dist/designguide/styles/"
                                 }
                             ],
                             mkdir: [`./dist${basename}release`],

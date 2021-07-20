@@ -1,6 +1,6 @@
 {
   "name": "@vikingtom/design.swedbankpay.com",
-  "version": "7.0.10",
+  "version": "7.0.11",
   "description": "VikingTom Design Guide",
   "main": "src/scripts/main/index.js",
   "scripts": {
@@ -101,11 +101,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "files": [
-    "dist/fonts/",
-    "dist/icons/",
-    "dist/img/",
-    "dist/scripts/",
-    "dist/styles/",
+    "dist/designguide/",
     "src/polyfills/",
     "src/scripts/dashboard/",
     "src/scripts/main/"

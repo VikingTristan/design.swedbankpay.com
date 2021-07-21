@@ -1,7 +1,6 @@
 /* eslint camelcase: 0, object-curly-newline: 0 */
 const path = require("path");
 const webpack = require("webpack");
-const miniSVGDataURI = require("mini-svg-data-uri");
 const appRoutes = require("./tools/generate-routes-copy-array");
 const levelsToRoot = require("./tools/levels-to-root");
 const TerserPlugin = require("terser-webpack-plugin");

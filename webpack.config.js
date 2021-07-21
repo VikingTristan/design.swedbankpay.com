@@ -1,6 +1,7 @@
 /* eslint camelcase: 0, object-curly-newline: 0 */
 const path = require("path");
 const webpack = require("webpack");
+const miniSVGDataURI = require("mini-svg-data-uri");
 const appRoutes = require("./tools/generate-routes-copy-array");
 const levelsToRoot = require("./tools/levels-to-root");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -38,6 +39,7 @@ module.exports = (env, argv) => {
             extensions: [".js", ".jsx", ".json"]
         },
         output: {
+            clean: true, // Cleans dist folder for each build
             path: path.resolve(__dirname, `dist${basename}`),
             filename: "scripts/[name].js",
             chunkFilename: "scripts/[name].[contenthash].js",
@@ -74,9 +76,7 @@ module.exports = (env, argv) => {
                     test: /\.less$/,
                     resolve: { extensions: [".less"] },
                     use: [
-                        {
-                            loader: isProd ? MiniCssExtractPlugin.loader : "style-loader"
-                        },
+                        { loader: isProd ? MiniCssExtractPlugin.loader : "style-loader" },
                         "css-loader",
                         "postcss-loader",
                         {
@@ -101,59 +101,134 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.(woff(2)?|ttf|eot)$/,
-                    use: [
-                        {
-                            loader: "file-loader",
-                            options: {
-                                outputPath: "designguide/fonts/",
-                                name: "[name].[ext]"
-                            }
-                        }
-                    ]
+                    type: "asset/resource",
+                    generator: {
+                        filename: "designguide/fonts/[name][ext]"
+                    }
+                },
+                // {
+                //     test: /\.svg$/,
+                //     type: "asset",
+                //     generator: {
+                //         filename: "designguide/icons/[name][ext]",
+                //         dataUrl (content) {
+                //             content = content.toString();
+
+                //             return miniSVGDataURI(content);
+                //         }
+                //     },
+                //     use: "svgo-loader"
+                // },
+                {
+                    test: /\.(png|jpe?g|gif|svg)$/i,
+                    exclude: /flags/,
+                    type: "asset/resource",
+                    generator: {
+                        filename: "designguide/assets/[name][ext]"
+                    }
                 },
                 {
                     test: /\.svg$/i,
                     include: [
                         path.resolve(__dirname, "src/icons/flags/1x1")
                     ],
-                    use: [
-                        {
-                            loader: "file-loader",
-                            options: {
-                                outputPath: "designguide/img/flags/1x1/",
-                                name: "[name].[ext]?[contenthash]"
-                            }
-                        }
-                    ]
+                    type: "asset/resource",
+                    generator: {
+                        filename: "designguide/assets/flags/1x1/[name][ext]"
+                    }
                 },
                 {
                     test: /\.svg$/i,
                     include: [
                         path.resolve(__dirname, "src/icons/flags/4x3")
                     ],
-                    use: [
-                        {
-                            loader: "file-loader",
-                            options: {
-                                outputPath: "designguide/img/flags/4x3/",
-                                name: "[name].[ext]?[contenthash]"
-                            }
-                        }
-                    ]
-                },
-                {
-                    test: /\.(png|jpe?g|gif|svg)$/i,
-                    exclude: /flags/,
-                    use: [
-                        {
-                            loader: "file-loader",
-                            options: {
-                                outputPath: "designguide/img/",
-                                name: "[name].[ext]?[contenthash]"
-                            }
-                        }
-                    ]
+                    type: "asset/resource",
+                    generator: {
+                        filename: "designguide/assets/flags/4x3/[name][ext]"
+                    }
                 }
+                // {
+                //     test: /\.(png|jpe?g|gif)$/i,
+                //     exclude: /flags/,
+                //     use: [
+                //         {
+                //             loader: "file-loader",
+                //             options: {
+                //                 outputPath: "img/",
+                //                 name: "[name].[ext]?[contenthash]"
+                //             }
+                //         }
+                //     ]
+                // }
+                // {
+                //     test: /\.(woff(2)?|ttf|eot)$/,
+                //     use: [
+                //         {
+                //             loader: "file-loader",
+                //             options: {
+                //                 outputPath: "designguide/fonts/",
+                //                 name: "[name].[ext]"
+                //             }
+                //         }
+                //     ]
+                // },
+                // {
+                //     test: /\.svg$/i,
+                //     include: [
+                //         path.resolve(__dirname, "src/icons/flags/1x1")
+                //     ],
+                //     use: [
+                //         {
+                //             loader: "file-loader",
+                //             options: {
+                //                 outputPath: "designguide/img/flags/1x1/",
+                //                 name: "[name].[ext]?[contenthash]"
+                //             }
+                //         }
+                //     ]
+                // },
+                // {
+                //     test: /\.svg$/i,
+                //     include: [
+                //         path.resolve(__dirname, "src/icons/flags/4x3")
+                //     ],
+                //     use: [
+                //         {
+                //             loader: "file-loader",
+                //             options: {
+                //                 outputPath: "designguide/img/flags/4x3/",
+                //                 name: "[name].[ext]?[contenthash]"
+                //             }
+                //         }
+                //     ]
+                // },
+                // Move all icons?
+                // {
+                //     test: /\.(png|jpe?g|gif|svg)$/i,
+                //     exclude: /flags/,
+                //     use: [
+                //         {
+                //             loader: "file-loader",
+                //             options: {
+                //                 outputPath: "img/",
+                //                 name: "[name].[ext]?[contenthash]"
+                //             }
+                //         }
+                //     ]
+                // },
+                // {
+                //     test: /\.(png|jpe?g|gif|svg)$/i,
+                //     exclude: /flags/,
+                //     use: [
+                //         {
+                //             loader: "file-loader",
+                //             options: {
+                //                 outputPath: "img/",
+                //                 name: "[name].[ext]?[contenthash]"
+                //             }
+                //         }
+                //     ]
+                // }
             ]
         },
         optimization: {
@@ -276,7 +351,7 @@ module.exports = (env, argv) => {
             new FaviconsWebpackPlugin({
                 logo: `./src/img/${brand}/favicon.png`,
                 cache: true,
-                prefix: "designguide/icons/",
+                prefix: "icons/",
                 inject: true,
                 favicons: {
                     appName: `${brandTitle} Design Guide`,
@@ -291,11 +366,6 @@ module.exports = (env, argv) => {
             new FileManagerPlugin({
                 runTasksInSeries: true,
                 events: {
-                    onStart: [
-                        {
-                            delete: ["./dist"]
-                        }
-                    ],
                     onEnd: [
                         {
                             copy: [
@@ -372,7 +442,7 @@ module.exports = (env, argv) => {
                                     destination: `./dist${basename}templates`
                                 },
                                 {
-                                    source: `./dist${basename}designguide/icons`,
+                                    source: `./dist${basename}icons`,
                                     destination: "./dist/temp/icons/icons"
                                 },
                                 {
@@ -401,7 +471,7 @@ module.exports = (env, argv) => {
                                 },
 
                                 /*
-                                 * Design Guide files for node package
+                                 * Files for node package
                                  */
                                 {
                                     source: `./dist${basename}scripts/designguide*.*`,
@@ -412,13 +482,17 @@ module.exports = (env, argv) => {
                                     destination: "./dist/designguide/styles/"
                                 },
                                 {
-                                    source: `./dist${basename}styles/payex.css`,
+                                    source: `./dist${basename}styles/payex.*`,
                                     destination: "./dist/designguide/styles/"
                                 },
                                 {
-                                    source: `./dist${basename}styles/swedbankpay.css`,
+                                    source: `./dist${basename}styles/swedbankpay.*`,
                                     destination: "./dist/designguide/styles/"
                                 }
+                                // {
+                                //     source: `./dist${basename}styles/swedbankpay.css`,
+                                //     destination: "./dist/designguide/styles/"
+                                // }
                             ],
                             mkdir: [`./dist${basename}release`],
                             archive: onEndArchive,

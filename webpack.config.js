@@ -29,9 +29,8 @@ module.exports = (env, argv) => {
     const config = {
         mode: argv.mode || "production",
         entry: {
-            designguide: "./src/scripts/main/index.js",
+            designguide: ["@babel/polyfill", "./src/scripts/main/index.js"],
             "designguide-dashboard": "./src/scripts/dashboard/index.js",
-            app: `./src/${brand}.js`,
             swedbankpay: "./src/swedbankpay.js",
             payex: "./src/payex.js"
         },
@@ -42,7 +41,7 @@ module.exports = (env, argv) => {
             clean: true, // Cleans dist folder for each build
             path: path.resolve(__dirname, `dist${basename}`),
             filename: "scripts/[name].js",
-            chunkFilename: "scripts/[name].[contenthash].js",
+            chunkFilename: "scripts/[name].js",
             publicPath: basename
         },
         devtool: isProd ? "source-map" : "eval",
@@ -99,6 +98,9 @@ module.exports = (env, argv) => {
                         "postcss-loader"
                     ]
                 },
+                /*
+                 * Fonts
+                 */
                 {
                     test: /\.(woff(2)?|ttf|eot)$/,
                     type: "asset/resource",
@@ -106,19 +108,9 @@ module.exports = (env, argv) => {
                         filename: "designguide/fonts/[name][ext]"
                     }
                 },
-                // {
-                //     test: /\.svg$/,
-                //     type: "asset",
-                //     generator: {
-                //         filename: "designguide/icons/[name][ext]",
-                //         dataUrl (content) {
-                //             content = content.toString();
-
-                //             return miniSVGDataURI(content);
-                //         }
-                //     },
-                //     use: "svgo-loader"
-                // },
+                /*
+                 * Images
+                 */
                 {
                     test: /\.(png|jpe?g|gif|svg)$/i,
                     exclude: /flags/,
@@ -127,6 +119,9 @@ module.exports = (env, argv) => {
                         filename: "designguide/assets/[name][ext]"
                     }
                 },
+                /*
+                 * Flags
+                 */
                 {
                     test: /\.svg$/i,
                     include: [
@@ -147,88 +142,6 @@ module.exports = (env, argv) => {
                         filename: "designguide/assets/flags/4x3/[name][ext]"
                     }
                 }
-                // {
-                //     test: /\.(png|jpe?g|gif)$/i,
-                //     exclude: /flags/,
-                //     use: [
-                //         {
-                //             loader: "file-loader",
-                //             options: {
-                //                 outputPath: "img/",
-                //                 name: "[name].[ext]?[contenthash]"
-                //             }
-                //         }
-                //     ]
-                // }
-                // {
-                //     test: /\.(woff(2)?|ttf|eot)$/,
-                //     use: [
-                //         {
-                //             loader: "file-loader",
-                //             options: {
-                //                 outputPath: "designguide/fonts/",
-                //                 name: "[name].[ext]"
-                //             }
-                //         }
-                //     ]
-                // },
-                // {
-                //     test: /\.svg$/i,
-                //     include: [
-                //         path.resolve(__dirname, "src/icons/flags/1x1")
-                //     ],
-                //     use: [
-                //         {
-                //             loader: "file-loader",
-                //             options: {
-                //                 outputPath: "designguide/img/flags/1x1/",
-                //                 name: "[name].[ext]?[contenthash]"
-                //             }
-                //         }
-                //     ]
-                // },
-                // {
-                //     test: /\.svg$/i,
-                //     include: [
-                //         path.resolve(__dirname, "src/icons/flags/4x3")
-                //     ],
-                //     use: [
-                //         {
-                //             loader: "file-loader",
-                //             options: {
-                //                 outputPath: "designguide/img/flags/4x3/",
-                //                 name: "[name].[ext]?[contenthash]"
-                //             }
-                //         }
-                //     ]
-                // },
-                // Move all icons?
-                // {
-                //     test: /\.(png|jpe?g|gif|svg)$/i,
-                //     exclude: /flags/,
-                //     use: [
-                //         {
-                //             loader: "file-loader",
-                //             options: {
-                //                 outputPath: "img/",
-                //                 name: "[name].[ext]?[contenthash]"
-                //             }
-                //         }
-                //     ]
-                // },
-                // {
-                //     test: /\.(png|jpe?g|gif|svg)$/i,
-                //     exclude: /flags/,
-                //     use: [
-                //         {
-                //             loader: "file-loader",
-                //             options: {
-                //                 outputPath: "img/",
-                //                 name: "[name].[ext]?[contenthash]"
-                //             }
-                //         }
-                //     ]
-                // }
             ]
         },
         optimization: {
@@ -268,7 +181,7 @@ module.exports = (env, argv) => {
                 meta: {
                     "informational-version": infoVersion
                 },
-                excludeChunks: ["swedbankpay", "payex"]
+                chunks: ["designguide", "designguide-dashboard", brand]
             }),
             new MiniCssExtractPlugin({
                 filename: "styles/[name].css"
@@ -308,7 +221,7 @@ module.exports = (env, argv) => {
                 hash: true,
                 title: `${brandTitle} Design Guide`,
                 basename,
-                excludeChunks: ["swedbankpay", "payex"]
+                chunks: ["designguide", "designguide-dashboard", brand]
             }),
             new HtmlWebpackPlugin({
                 filename: `${rootPath}404.html`,
@@ -316,7 +229,7 @@ module.exports = (env, argv) => {
                 hash: true,
                 title: `${brandTitle} Design Guide`,
                 basename,
-                excludeChunks: ["swedbankpay", "payex"]
+                chunks: ["designguide", "designguide-dashboard", brand]
             }),
         );
 
@@ -427,23 +340,23 @@ module.exports = (env, argv) => {
                                 },
                                 {
                                     source: "./src/img/background/*.svg",
-                                    destination: `./dist${basename}img/background`
+                                    destination: `./dist${basename}img/background/`
                                 },
                                 {
                                     source: "./src/assets/logos/*.zip",
-                                    destination: `./dist${basename}release/logos`
+                                    destination: `./dist${basename}release/logos/`
                                 },
                                 {
                                     source: "./src/assets/fonts/*.zip",
-                                    destination: `./dist${basename}release/fonts`
+                                    destination: `./dist${basename}release/fonts/`
                                 },
                                 {
                                     source: "./src/assets/templates/*",
-                                    destination: `./dist${basename}templates`
+                                    destination: `./dist${basename}templates/`
                                 },
                                 {
                                     source: `./dist${basename}icons`,
-                                    destination: "./dist/temp/icons/icons"
+                                    destination: "./dist/temp/icons/icons/"
                                 },
                                 {
                                     source: `./dist${basename}scripts/designguide.js`,
@@ -459,7 +372,7 @@ module.exports = (env, argv) => {
                                 },
                                 {
                                     source: `./dist${basename}scripts/designguide-dashboard.js.map`,
-                                    destination: "./dist/temp/release/scripts"
+                                    destination: "./dist/temp/release/scripts/"
                                 },
                                 {
                                     source: `./dist${basename}styles/swedbankpay.css`,
@@ -489,10 +402,6 @@ module.exports = (env, argv) => {
                                     source: `./dist${basename}styles/swedbankpay.*`,
                                     destination: "./dist/designguide/styles/"
                                 }
-                                // {
-                                //     source: `./dist${basename}styles/swedbankpay.css`,
-                                //     destination: "./dist/designguide/styles/"
-                                // }
                             ],
                             mkdir: [`./dist${basename}release`],
                             archive: onEndArchive,

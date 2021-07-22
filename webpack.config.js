@@ -28,7 +28,7 @@ module.exports = (env, argv) => {
     const config = {
         mode: argv.mode || "production",
         entry: {
-            designguide: ["@babel/polyfill", "./src/scripts/main/index.js"],
+            designguide: ["@babel/polyfill", "./src/designguide.js"],
             "designguide-dashboard": "./src/scripts/dashboard/index.js",
             swedbankpay: "./src/swedbankpay.js",
             payex: "./src/payex.js"
@@ -39,7 +39,7 @@ module.exports = (env, argv) => {
         output: {
             clean: true, // Cleans dist folder for each build
             path: path.resolve(__dirname, `dist${basename}`),
-            filename: "scripts/[name].js",
+            filename: "scripts/[name].bundle.js",
             chunkFilename: "scripts/[name].js",
             publicPath: basename
         },
@@ -358,19 +358,7 @@ module.exports = (env, argv) => {
                                     destination: "./dist/temp/icons/icons/"
                                 },
                                 {
-                                    source: `./dist${basename}scripts/designguide.js`,
-                                    destination: "./dist/temp/release/scripts/"
-                                },
-                                {
-                                    source: `./dist${basename}scripts/designguide.js.map`,
-                                    destination: "./dist/temp/release/scripts/"
-                                },
-                                {
-                                    source: `./dist${basename}scripts/designguide-dashboard.js`,
-                                    destination: "./dist/temp/release/scripts/"
-                                },
-                                {
-                                    source: `./dist${basename}scripts/designguide-dashboard.js.map`,
+                                    source: `./dist${basename}scripts/designguide*.*`,
                                     destination: "./dist/temp/release/scripts/"
                                 },
                                 {

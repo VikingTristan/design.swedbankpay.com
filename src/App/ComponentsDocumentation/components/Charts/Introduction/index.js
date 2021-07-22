@@ -5,9 +5,10 @@ import CodeTags from "@components/CodeTags";
 
 const basename = process.env.basename;
 const brand = process.env.brand;
-const dashboardScriptUrl = `${window.location.origin + basename}scripts/dg-dashboard.js`;
-const styleUrl = `${window.location.origin + basename}styles/dg-style.css`;
+const scriptUrl = `${window.location.origin + basename}scripts/dg.js`;
 const styleUrl = `${window.location.origin + basename}styles/${brand}.css`;
+const dashboardScriptUrl = `${window.location.origin + basename}scripts/dg-dashboard.js`;
+const dashboardStyleUrl = `${window.location.origin + basename}styles/dg-dashboard.css`;
 
 const QuickStart = () => (
     <>

@@ -13,7 +13,7 @@ exports[`Utilities: RenderPage renders 1`] = `
       className="dg-current-version text-uppercase"
     >
       Design Guide – v. 
-      7.0.12
+      7.0.15-fork
     </span>
     <Switch>
       <Route

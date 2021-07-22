@@ -6,6 +6,7 @@ import { ComponentPreview, DocContainer } from "@docutils";
 import CodeTags from "@components/CodeTags";
 
 const basename = process.env.basename;
+const brand = process.env.brand;
 
 const Installation = () => (
     <section>
@@ -14,7 +15,7 @@ const Installation = () => (
         <h3>Include in the header</h3>
         <p>Copy-paste the following CSS code into <CodeTags type="secondary" code="<head>"/> before all the other stylesheets in order to load our CSS.</p>
         <ComponentPreview language="html" codeFigure>
-            <link rel="stylesheet" href={`${window.location.origin + basename}styles/dg-style.css`} />
+            <link rel="stylesheet" href={`${window.location.origin + basename}styles/${brand}.css`} />
         </ComponentPreview>
 
         <h3>Include at the bottom</h3>

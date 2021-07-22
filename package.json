@@ -1,6 +1,6 @@
 {
   "name": "@vikingtom/design.swedbankpay.com",
-  "version": "7.0.14-fork",
+  "version": "7.0.15-fork",
   "description": "VikingTom Design Guide",
   "main": "src/scripts/main/index.js",
   "scripts": {

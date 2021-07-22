@@ -23,7 +23,7 @@ const Installation = () => (
         <ComponentPreview language="html" codeFigure>
             <script src={`${window.location.origin + basename}scripts/dg.js`}></script>
         </ComponentPreview>
-        <h2>Installation with NPM</h2>
+        <h2 id="installation-npm">Installation with NPM</h2>
         <p>If you want to host the Design Guide files in your own app, run the following command.</p>
         <ComponentPreview language="terminal" codeFigure>
             npm i @swedbankpay/design.swedbankpay.com
